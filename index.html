@@ -4,44 +4,60 @@
   <meta charset="UTF-8">
   <title>おみくじルーレット</title>
   <style>
-    body { text-align: center; margin-top: 50px; }
-    #result { font-size: 2em; margin: 20px; }
-    #comment { font-size: 1.2em; margin-bottom: 10px; color: #555; }
-    #fortune-img { width: 120px; height: 120px; margin: 10px auto; display: block; }
-    #showstaff { color: #c00; font-weight: bold; margin-top: 20px; font-size: 1.1em; }
+    html, body { height: 100%; margin: 0; padding: 0; }
+    body {
+      width: 100vw; height: 100vh; min-height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #fortune-img { width: 30vw; max-width: 400px; min-width: 180px; height: auto; margin: 2vh auto; display: block; }
+    #result { font-size: 4vw; margin: 3vh 0 1vh 0; }
+    #comment { font-size: 2vw; margin-bottom: 2vh; }
+    #draw-btn { font-size: 2vw; padding: 1vh 3vw; margin-top: 2vh; }
+    #showstaff { font-size: 2vw; margin-top: 2vh; }
+    #fullscreen-btn { position: absolute; top: 1vw; right: 1vw; font-size: 1.3vw; }
   </style>
 </head>
 <body>
+  <button id="fullscreen-btn" onclick="openFullscreen()">全画面表示</button>
   <h1>今日のおみくじルーレット</h1>
   <div id="result"></div>
-  <!-- ↓ここに画像が出る！ -->
   <img id="fortune-img" src="" alt="おみくじ画像">
   <div id="comment"></div>
   <button id="draw-btn">おみくじを引く！</button>
   <div id="showstaff">スタッフに見せてね～！</div>
-
   <script>
-    // クジの種類・画像・コメント（好きな画像に変えてOK！）
     const fortunes = [
-      {text: "大吉", img: "daikitikuji.jpg", comment: "今日は絶好調！何やってもうまくいく予感♪"},
-      {text: "中吉", img: "chuukitikuji.jpg", comment: "まずまずの運勢。少し背伸びすると良いことあるかも？"},
-      {text: "吉", img: "kitikuji.jpg", comment: "落ち着いて行動すればきっと大丈夫。焦らずゆっくり進もう！"},
-      {text: "凶", img: "kyukuji.jpg", comment: "無理せず慎重に。こんな日もあるさ！気をつけてね。"}
+      {text: "大吉", img: "daikichi.jpg", comment: "今日は絶好調！何やってもうまくいく予感♪"},
+      {text: "中吉", img: "chuukichi.jpg", comment: "まずまずの運勢。少し背伸びすると良いことあるかも？"},
+      {text: "吉", img: "kichi.jpg", comment: "落ち着いて行動すればきっと大丈夫。焦らずゆっくり進もう！"},
+      {text: "凶", img: "kyo.jpg", comment: "無理せず慎重に。こんな日もあるさ！気をつけてね。"}
     ];
-
     const btn = document.getElementById('draw-btn');
     const result = document.getElementById('result');
     const comment = document.getElementById('comment');
     const img = document.getElementById('fortune-img');
-
     btn.onclick = function() {
       const index = Math.floor(Math.random() * fortunes.length);
       const picked = fortunes[index];
       result.textContent = picked.text;
-      img.src = picked.img;       // ←ここで画像がセットされる！
+      img.src = picked.img;
       img.style.display = "block";
       comment.textContent = picked.comment;
     };
+    function openFullscreen() {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
+      }
+    }
   </script>
 </body>
 </html>
+
