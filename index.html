@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>おみくじルーレット</title>
+  <style>
+    body { text-align: center; margin-top: 50px; }
+    #result { font-size: 2em; margin: 20px; }
+    #comment { font-size: 1.2em; margin-bottom: 10px; color: #555; }
+    #fortune-img { width: 120px; height: 120px; margin: 10px auto; display: block; }
+    #showstaff { color: #c00; font-weight: bold; margin-top: 20px; font-size: 1.1em; }
+  </style>
+</head>
+<body>
+  <h1>今日のおみくじルーレット</h1>
+  <div id="result"></div>
+  <!-- ↓ここに画像が出る！ -->
+  <img id="fortune-img" src="" alt="おみくじ画像">
+  <div id="comment"></div>
+  <button id="draw-btn">おみくじを引く！</button>
+  <div id="showstaff">スタッフに見せてね～！</div>
+
+  <script>
+    // クジの種類・画像・コメント（好きな画像に変えてOK！）
+    const fortunes = [
+      {text: "大吉", img: "daikitikuji.jpg", comment: "今日は絶好調！何やってもうまくいく予感♪"},
+      {text: "中吉", img: "chuukitikuji.jpg", comment: "まずまずの運勢。少し背伸びすると良いことあるかも？"},
+      {text: "吉", img: "kitikuji.jpg", comment: "落ち着いて行動すればきっと大丈夫。焦らずゆっくり進もう！"},
+      {text: "凶", img: "kyukuji.jpg", comment: "無理せず慎重に。こんな日もあるさ！気をつけてね。"}
+    ];
+
+    const btn = document.getElementById('draw-btn');
+    const result = document.getElementById('result');
+    const comment = document.getElementById('comment');
+    const img = document.getElementById('fortune-img');
+
+    btn.onclick = function() {
+      const index = Math.floor(Math.random() * fortunes.length);
+      const picked = fortunes[index];
+      result.textContent = picked.text;
+      img.src = picked.img;       // ←ここで画像がセットされる！
+      img.style.display = "block";
+      comment.textContent = picked.comment;
+    };
+  </script>
+</body>
+</html>
